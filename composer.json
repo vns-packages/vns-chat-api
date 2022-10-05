@@ -1,0 +1,48 @@
+{
+    "name": "vns/chatting",
+    "description": "api for make chatting easy",
+    "keywords": [
+        "vns",
+        "chatting"
+    ],
+    "homepage": "https://github.com/vns/chatting-backend",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Naif Sameer",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^9.0",
+        "spatie/laravel-medialibrary": "^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vns\\Chatting\\": "src"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vns\\Chatting\\ChattingServiceProvider"
+            ],
+            "aliases": {
+                "Chatting": "Vns\\Chatting\\ChattingFacade"
+            }
+        }
+    }
+}
