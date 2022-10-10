@@ -37,22 +37,30 @@ class Chatting
 
     public function storeMessage($user_id, $conversationID, $body, $type)
     {
-        $message = ChatMessage::create([
-            'body'            => $type == 'file' ? 'file' : $body,
-            'type'            => $type ?? 'text',
-            'user_id'         => $user_id,
-            'conversation_id' => $conversationID,
-        ]);
+        if ($type === 'file') {
+            $message = ChatMessage::create([
+                'body'            => 'file',
+                'type'            => 'file',
+                'user_id'         => $user_id,
+                'conversation_id' => $conversationID,
+            ]);
+
+            if ($type == 'file') $message->saveMedia($body);
+        } else {
+            $message = ChatMessage::create([
+                'body'            => $body,
+                'type'            => 'text',
+                'user_id'         => $user_id,
+                'conversation_id' => $conversationID,
+            ]);
+        }
 
         // if ($this->getConversationById($conversationID)->is_group) {
         // } else
 
-        Log::info('', [$this->getConversationById($conversationID), $conversationID]);
+        // Log::info('', [$this->getConversationById($conversationID), $conversationID]);
 
-        event(new SendMessageEvent($conversationID, $message));
-
-
-        if ($type == 'file') $message->saveMedia($body);
+        // event(new SendMessageEvent($conversationID, $message));
 
         return $message;
     }

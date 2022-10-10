@@ -5,6 +5,7 @@ namespace Vns\Chatting\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Log;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vns\Chatting\Traits\SaveMedia;
@@ -53,7 +54,11 @@ class ChatMessage extends Model implements HasMedia
         if ($this->type == 'file') {
             $media = $this->getFirstMedia();
 
-            return ['path' => $this->getFirstMediaUrl('default'), 'mime_type' => $media['mime_type'], 'name' => $media['name']];
+            return [
+                'path'      => $this->getFirstMediaUrl('default'),
+                'mime_type' => $media['mime_type'],
+                'name'      => $media['name']
+            ];
         }
 
         return $body;

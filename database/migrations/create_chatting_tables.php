@@ -23,7 +23,7 @@ class CreateChattingTables extends Migration
 
             $table->foreignId('reply_to_id')->nullable()->references('id')->on('chat_messages');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('conversation_id')->references('id')->on('chat_conversations');
+            $table->foreignId('conversation_id')->references('id')->on('chat_conversations')->cascadeOnDelete();
 
             $table->boolean('is_read')->default(false);
 
@@ -33,8 +33,8 @@ class CreateChattingTables extends Migration
         Schema::create('chat_conversation_user', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('conversation_id')->references('id')->on('chat_conversations');
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('conversation_id')->references('id')->on('chat_conversations')->cascadeOnDelete();
 
             $table->timestamps();
         });
