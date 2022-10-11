@@ -18,7 +18,7 @@ class Chatting
 
     public function getConversationById($conversationID)
     {
-        return ChatConversation::where('id', $conversationID)->first();
+        return ChatConversation::findOrFail($conversationID);
     }
 
     public function deleteConversation($conversationID)

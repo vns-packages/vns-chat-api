@@ -11,7 +11,9 @@ class CreateChattingTables extends Migration
         Schema::create('chat_conversations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('is_group')->default(false);
+            $table->foreignId('group_admin_id')->nullable();
 
             $table->timestamps();
         });
