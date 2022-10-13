@@ -32,7 +32,7 @@ class Chatting
     {
         // $this->readAllMessages($conversationID);
 
-        return ChatMessage::where('conversation_id', $conversationID)->latest()->with('user')->paginate(50);
+        return ChatMessage::where('conversation_id', $conversationID)->latest()->with('user')->paginate(15);
     }
 
     public function storeMessage($user_id, $conversationID, $body, $type)

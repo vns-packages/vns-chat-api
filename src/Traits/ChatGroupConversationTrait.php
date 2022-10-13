@@ -9,7 +9,7 @@ use Vns\Chatting\Models\ChatConversation;
 
 trait ChatGroupConversationTrait
 {
-    public function storeGroupConversation(array $userIDS, string $groupName, string $groupImage)
+    public function storeGroupConversation(array $userIDS, string $groupName, string $groupImage = null)
     {
         $conversation = ChatConversation::create([
             'is_group'       => true,
@@ -17,7 +17,7 @@ trait ChatGroupConversationTrait
             'group_admin_id' => auth()->id()
         ]);
 
-        $conversation->saveMedia($groupImage);
+        if ($groupImage) $conversation->saveMedia($groupImage);
 
         $conversation->users()->attach([...$userIDS, auth()->id()]);
 

@@ -48,11 +48,12 @@ class ChatMessage extends Model implements HasMedia
         return $this->belongsTo(ChatConversation::class, 'conversation_id');
     }
 
-
     public function getBodyAttribute($body)
     {
         if ($this->type == 'file') {
             $media = $this->getFirstMedia();
+
+            if (!$media) return $body;
 
             return [
                 'path'      => $this->getFirstMediaUrl('default'),
